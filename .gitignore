@@ -1,0 +1,61 @@
+# 操作系统生成文件
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# 编辑器及IDE配置
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.project
+.classpath
+.settings/
+
+# 日志文件
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 本地临时文件
+*.tmp
+*.temp
+*.cache
+
+# 压缩包文件（避免把zip也提交进去）
+*.zip
+*.rar
+*.7z
+*.tar.gz
+
+# 本地环境配置
+.env
+.env.local
+.env.*.local
+
+# 测试和覆盖率
+coverage/
+.nyc_output/
+
+# 备份文件
+*.bak
+*.backup
+*~
+
+# 项目特定（如有需要可取消注释）
+# node_modules/
+# dist/
+# build/
+
+# 用户上传的模拟数据存储（localStorage相关的不需要忽略，因为是浏览器存储）
+# 但如果有生成的文件可以放在这里
+data/user_uploads/
+*.db

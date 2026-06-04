@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>分享资源 - 资源分享站 | 模拟上传</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/data.js"></script>
+</head>
+<body>
+    <!-- 全局头部 / 导航栏 -->
+    <header class="site-header">
+        <div class="container nav-container">
+            <div class="logo">
+                <h1>📁 资源分享站</h1>
+                <p class="tagline">发现 · 共享 · 成长</p>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">首页</a>
+                <a href="resources.html">资源大厅</a>
+                <a href="upload.html" class="active">分享资源</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- 页面标题区 -->
+        <section class="page-header">
+            <div class="container">
+                <h2>📤 分享您的优质资源</h2>
+                <p>让更多人看到你的推荐，共建知识宝库</p>
+            </div>
+        </section>
+
+        <!-- 上传/分享表单 -->
+        <section class="upload-form-section">
+            <div class="container">
+                <div class="form-card">
+                    <form id="shareResourceForm">
+                        <!-- 资源标题 -->
+                        <div class="form-group">
+                            <label for="resTitle">资源标题 <span class="required">*</span></label>
+                            <input type="text" id="resTitle" name="title" placeholder="例: 前端进阶完全指南.pdf" required>
+                            <span class="field-hint">简明扼要描述资源内容</span>
+                        </div>
+
+                        <!-- 资源分类 -->
+                        <div class="form-group">
+                            <label for="resCategory">资源分类 <span class="required">*</span></label>
+                            <select id="resCategory" name="category" required>
+                                <option value="">请选择分类</option>
+                                <option value="编程开发">💻 编程开发</option>
+                                <option value="设计创意">🎨 设计创意</option>
+                                <option value="实用工具">🛠️ 实用工具</option>
+                                <option value="文档模板">📄 文档模板</option>
+                                <option value="学习教程">📚 学习教程</option>
+                                <option value="其他资源">📦 其他资源</option>
+                            </select>
+                        </div>
+
+                        <!-- 资源描述 -->
+                        <div class="form-group">
+                            <label for="resDesc">资源描述 <span class="required">*</span></label>
+                            <textarea id="resDesc" name="description" rows="4" placeholder="详细介绍资源内容、适用人群、亮点等..." required></textarea>
+                        </div>
+
+                        <!-- 资源链接 (模拟) -->
+                        <div class="form-group">
+                            <label for="resLink">资源链接/网盘地址</label>
+                            <input type="url" id="resLink" name="link" placeholder="https://pan.baidu.com/s/xxxx 或 其他网址">
+                            <span class="field-hint">为模拟环境，不会真实存储，仅演示效果</span>
+                        </div>
+
+                        <!-- 标签/关键词 -->
+                        <div class="form-group">
+                            <label for="resTags">标签 (多个标签用逗号或空格分开)</label>
+                            <input type="text" id="resTags" name="tags" placeholder="例: JavaScript, 电子书, 面试">
+                        </div>
+
+                        <!-- 缩略图URL (可选) -->
+                        <div class="form-group">
+                            <label for="resThumb">缩略图链接 (可选)</label>
+                            <input type="url" id="resThumb" name="thumbnail" placeholder="https://picsum.photos/200/120?random=1">
+                            <span class="field-hint">留空则使用默认图片</span>
+                        </div>
+
+                        <!-- 提交按钮区域 -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">🚀 模拟发布资源</button>
+                            <button type="reset" class="btn btn-reset">清空重填</button>
+                        </div>
+
+                        <!-- 提示消息区域 -->
+                        <div id="formFeedback" class="form-feedback" style="display:none;"></div>
+                    </form>
+
+                    <!-- 近期模拟提交记录 (仅演示本地存储模拟) -->
+                    <div class="recent-submissions">
+                        <h3>📋 近期模拟分享记录 (本地演示)</h3>
+                        <ul id="recentList">
+                            <li>暂无提交记录，填写表单并提交试试～</li>
+                        </ul>
+                        <p class="note">* 本模拟站不会上传至服务器，数据仅保存在浏览器本地</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <p>© 2025 资源分享站 | 本地模拟项目 · 表单仅用于前端演示交互</p>
+            <p>提交的资源会临时显示在下方记录中，并可以通过「资源大厅」模拟添加(为了保持模拟动态)</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // upload页面逻辑：负责收集表单数据、展示本地记录
+        document.addEventListener('DOMContentLoaded', function() {
+            // 如果main.js有专用上传页初始化调用它，否则使用内嵌逻辑
+            if (typeof window.initUploadPage === 'function') {
+                window.initUploadPage();
+            } else {
+                // 独立后备上传交互
+                initUploadStandalone();
+            }
+        });
+
+        function initUploadStandalone() {
+            const form = document.getElementById('shareResourceForm');
+            const feedbackDiv = document.getElementById('formFeedback');
+            const recentList = document.getElementById('recentList');
+
+            // 从localStorage读取已有模拟记录
+            let localRecords = JSON.parse(localStorage.getItem('mock_share_records') || '[]');
+
+            // 刷新展示记录列表
+            function renderRecords() {
+                if (!recentList) return;
+                if (localRecords.length === 0) {
+                    recentList.innerHTML = '<li>暂无提交记录，填写表单并提交试试～</li>';
+                    return;
+                }
+                recentList.innerHTML = localRecords.slice().reverse().map(rec => 
+                    `<li><strong>${escapeHtml(rec.title)}</strong> (${rec.category}) - 发布于 ${rec.date}</li>`
+                ).join('');
+            }
+
+            // 简单防XSS
+            function escapeHtml(str) {
+                if(!str) return '';
+                return str.replace(/[&<>]/g, function(m) {
+                    if(m === '&') return '&amp;';
+                    if(m === '<') return '&lt;';
+                    if(m === '>') return '&gt;';
+                    return m;
+                });
+            }
+
+            // 处理表单提交
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                // 获取字段值
+                const title = document.getElementById('resTitle').value.trim();
+                const categoryElem = document.getElementById('resCategory');
+                const category = categoryElem.options[categoryElem.selectedIndex]?.text || categoryElem.value;
+                const description = document.getElementById('resDesc').value.trim();
+                const link = document.getElementById('resLink').value.trim();
+                const tags = document.getElementById('resTags').value.trim();
+                const thumbnail = document.getElementById('resThumb').value.trim();
+                
+                if (!title) {
+                    showFeedback('请填写资源标题', 'error');
+                    return;
+                }
+                if (!categoryElem.value) {
+                    showFeedback('请选择资源分类', 'error');
+                    return;
+                }
+                if (!description) {
+                    showFeedback('请填写资源描述', 'error');
+                    return;
+                }
+                
+                // 创建新记录对象
+                const newRecord = {
+                    id: Date.now(),
+                    title: title,
+                    category: category,
+                    categoryKey: categoryElem.value,
+                    description: description,
+                    link: link,
+                    tags: tags,
+                    thumbnail: thumbnail || 'https://picsum.photos/200/120?random=default',
+                    date: new Date().toLocaleString(),
+                    downloads: 0,
+                    hot: false
+                };
+                
+                // 添加到本地记录数组
+                localRecords.unshift(newRecord);
+                // 限制最多存储15条模拟记录
+                if(localRecords.length > 15) localRecords.pop();
+                localStorage.setItem('mock_share_records', JSON.stringify(localRecords));
+                
+                // 关键：同时更新全局资源数据 window.allResources 并保存到localStorage，以便资源大厅看到新增资源
+                if (typeof window.allResources !== 'undefined' && Array.isArray(window.allResources)) {
+                    // 构造一个符合原数据结构的资源项 额外插入到全局数组头部
+                    const newResForGlobal = {
+                        id: newRecord.id,
+                        title: newRecord.title,
+                        category: newRecord.categoryKey || 'other',
+                        categoryName: newRecord.category,
+                        description: newRecord.description,
+                        link: newRecord.link,
+                        tags: newRecord.tags ? newRecord.tags.split(/[ ,]+/).filter(t => t) : [],
+                        thumbnail: newRecord.thumbnail,
+                        downloads: 0,
+                        hot: false,
+                        dateAdded: new Date().toISOString()
+                    };
+                    window.allResources.unshift(newResForGlobal);
+                    // 尝试同步至 localstorage 便于持久
+                    if(window.syncResourcesToLocalStorage) window.syncResourcesToLocalStorage();
+                    else {
+                        localStorage.setItem('mock_resources_data', JSON.stringify(window.allResources));
+                    }
+                } else {
+                    console.warn("全局资源数组不存在，无法同步最新资源至大厅");
+                }
+                
+                // 刷新下方的记录列表
+                renderRecords();
+                // 显示成功信息
+                showFeedback('模拟分享成功！资源已添加到资源大厅（本地演示）', 'success');
+                // 重置表单（可选，保留用户友好，但为了演示不清空也可以，清空重置吧）
+                form.reset();
+                // 额外重置分类默认值
+                categoryElem.value = '';
+                // 滚动到反馈提示
+                feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+            
+            function showFeedback(msg, type) {
+                if(!feedbackDiv) return;
+                feedbackDiv.textContent = msg;
+                feedbackDiv.className = `form-feedback ${type === 'error' ? 'error-feedback' : 'success-feedback'}`;
+                feedbackDiv.style.display = 'block';
+                setTimeout(() => {
+                    feedbackDiv.style.display = 'none';
+                }, 4000);
+            }
+            
+            // 初始化展示localStorage记录
+            renderRecords();
+            
+            // 重置按钮纯前端行为, 不用额外逻辑
+            const resetBtn = document.querySelector('.btn-reset');
+            if(resetBtn) {
+                resetBtn.addEventListener('click', function() {
+                    form.reset();
+                    showFeedback('表单已清空', 'success');
+                });
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>资源分享站 - 首页 | 发现优质资源</title>
+    <!-- 引入样式表 -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 引入模拟数据 (JS 方式) -->
+    <script src="js/data.js"></script>
+</head>
+<body>
+    <!-- 全局头部 / 导航栏 -->
+    <header class="site-header">
+        <div class="container nav-container">
+            <div class="logo">
+                <h1>📁 资源分享站</h1>
+                <p class="tagline">发现 · 共享 · 成长</p>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html" class="active">首页</a>
+                <a href="resources.html">资源大厅</a>
+                <a href="upload.html">分享资源</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 主内容区域 -->
+    <main>
+        <!-- 欢迎横幅 / 快速统计 -->
+        <section class="hero">
+            <div class="container hero-content">
+                <h2>✨ 汇聚精选资源，等你来发现</h2>
+                <p>编程 · 设计 · 工具 · 文档 · 创意素材</p>
+                <a href="resources.html" class="btn btn-primary">浏览全部资源 →</a>
+            </div>
+        </section>
+
+        <!-- 最新资源展示区（从 data.js 中读取前6条） -->
+        <section class="featured-resources">
+            <div class="container">
+                <div class="section-header">
+                    <h2>🔥 最新推荐</h2>
+                    <a href="resources.html" class="view-all">查看全部 &gt;</a>
+                </div>
+                <div class="resources-grid" id="latestResourcesGrid">
+                    <!-- 动态加载最新资源列表，由 main.js 渲染 -->
+                    <div class="loading-placeholder">加载资源中...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 热门分类快速入口 -->
+        <section class="categories-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>📂 热门分类</h2>
+                    <span>快速筛选您感兴趣的内容</span>
+                </div>
+                <div class="categories-grid" id="quickCategories">
+                    <!-- 通过js动态生成分类按钮，data.js中提取 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 分享引导卡片 -->
+        <section class="share-cta">
+            <div class="container share-card">
+                <div class="share-text">
+                    <h3>🎁 您有好资源？</h3>
+                    <p>分享有价值的学习资料、实用软件、创作素材，帮助更多同路人。</p>
+                    <a href="upload.html" class="btn btn-secondary">立即分享资源 →</a>
+                </div>
+                <div class="share-icon">
+                    📤
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚信息 -->
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <p>© 2025 资源分享站 | 本地模拟项目 · 仅供学习展示</p>
+            <p>所有资源均为模拟数据，仅用于演示交互效果。</p>
+        </div>
+    </footer>
+
+    <!-- 主要交互脚本 -->
+    <script src="js/main.js"></script>
+    <!-- 额外内联：确保DOM加载完成后渲染首页特有内容 -->
+    <script>
+        // 等待 DOM 和 main.js 加载完成（main.js 会暴露 initHomePage 或自动初始化）
+        document.addEventListener('DOMContentLoaded', function() {
+            // 如果全局函数存在则调用，否则由 main.js 自行监听
+            if (typeof window.initHomePage === 'function') {
+                window.initHomePage();
+            } else {
+                // 后备：确保资源网格显示
+                console.log("等待 main.js 加载...");
+                // 延迟检查，避免data未加载
+                setTimeout(() => {
+                    if (typeof renderResourceGrid === 'function' && window.allResources) {
+                        const latest = window.allResources.slice(0,6);
+                        renderResourceGrid('latestResourcesGrid', latest);
+                        if (typeof initCategoriesGrid === 'function') initCategoriesGrid();
+                    }
+                }, 100);
+            }
+        });
+    </script>
+</body>
+</html>

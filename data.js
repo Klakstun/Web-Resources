@@ -1,0 +1,166 @@
+/**
+ * 模拟资源数据 - 资源分享站
+ * 包含初始示例资源: 编程、设计、工具、文档等类别
+ */
+
+window.allResources = [
+    {
+        id: 1001,
+        title: "前端架构师成长路线图",
+        description: "2025年最新前端架构师学习路线，包含React、Vue3、Node.js、性能优化等核心知识体系，附思维导图",
+        category: "编程开发",
+        categoryName: "编程开发",
+        tags: ["前端", "架构", "路线图", "React", "Vue"],
+        thumbnail: "https://picsum.photos/id/26/300/160",  // 风景照示意
+        link: "https://example.com/resource/frontend-roadmap",
+        downloads: 1247,
+        hot: true,
+        dateAdded: "2025-05-10T08:00:00Z"
+    },
+    {
+        id: 1002,
+        title: "Figma 大师课组件库源文件",
+        description: "完整设计系统组件库，包含按钮、表单、导航等300+组件，适合快速搭建产品原型",
+        category: "设计创意",
+        categoryName: "设计创意",
+        tags: ["Figma", "UI设计", "组件库", "设计系统"],
+        thumbnail: "https://picsum.photos/id/20/300/160",
+        link: "https://example.com/resource/figma-kit",
+        downloads: 892,
+        hot: true,
+        dateAdded: "2025-05-08T12:30:00Z"
+    },
+    {
+        id: 1003,
+        title: "AI 绘画提示词宝典 (3000+条)",
+        description: "收录Midjourney、Stable Diffusion、DALL-E 3高质量提示词，分类详尽包含人物、场景、风格等",
+        category: "学习教程",
+        categoryName: "学习教程",
+        tags: ["AI", "绘画", "提示词", "Midjourney"],
+        thumbnail: "https://picsum.photos/id/15/300/160",
+        link: "https://example.com/resource/ai-prompts",
+        downloads: 2560,
+        hot: true,
+        dateAdded: "2025-05-05T09:15:00Z"
+    },
+    {
+        id: 1004,
+        title: "Visual Studio Code 高效配置包",
+        description: "内含settings.json、20+热门扩展推荐、快捷键指南，提升开发效率的终极配置",
+        category: "实用工具",
+        categoryName: "实用工具",
+        tags: ["VSCode", "配置", "效率", "插件"],
+        thumbnail: "https://picsum.photos/id/0/300/160",
+        link: "https://example.com/resource/vscode-settings",
+        downloads: 532,
+        hot: false,
+        dateAdded: "2025-05-12T14:20:00Z"
+    },
+    {
+        id: 1005,
+        title: "Python 数据分析实战教程 (PDF)",
+        description: "从Pandas、NumPy到Matplotlib，完整数据分析案例，包含电商销售数据实战项目",
+        category: "编程开发",
+        categoryName: "编程开发",
+        tags: ["Python", "数据分析", "Pandas", "PDF"],
+        thumbnail: "https://picsum.photos/id/36/300/160",
+        link: "https://example.com/resource/python-data-analysis",
+        downloads: 1780,
+        hot: true,
+        dateAdded: "2025-05-01T10:00:00Z"
+    },
+    {
+        id: 1006,
+        title: "简历与求职信模板大礼包",
+        description: "20+行业精选简历模板（Word/PPT/PSD格式），包含程序员、设计师、产品经理专属版本",
+        category: "文档模板",
+        categoryName: "文档模板",
+        tags: ["简历", "求职", "模板", "面试"],
+        thumbnail: "https://picsum.photos/id/24/300/160",
+        link: "https://example.com/resource/resume-templates",
+        downloads: 3100,
+        hot: true,
+        dateAdded: "2025-05-09T16:45:00Z"
+    },
+    {
+        id: 1007,
+        title: "Blender 3D 建模入门手册",
+        description: "零基础学习Blender，包含建模、材质、渲染基础，附赠工程文件",
+        category: "设计创意",
+        categoryName: "设计创意",
+        tags: ["Blender", "3D建模", "入门", "设计"],
+        thumbnail: "https://picsum.photos/id/29/300/160",
+        link: "https://example.com/resource/blender-guide",
+        downloads: 445,
+        hot: false,
+        dateAdded: "2025-05-11T11:00:00Z"
+    },
+    {
+        id: 1008,
+        title: "Git 团队协作最佳实践",
+        description: "Git Flow、GitHub Actions、代码审查流程，适合团队开发规范建立",
+        category: "编程开发",
+        categoryName: "编程开发",
+        tags: ["Git", "协作", "版本控制", "团队"],
+        thumbnail: "https://picsum.photos/id/89/300/160",
+        link: "https://example.com/resource/git-best-practices",
+        downloads: 823,
+        hot: false,
+        dateAdded: "2025-05-07T09:30:00Z"
+    },
+    {
+        id: 1009,
+        title: "Windows 系统优化工具箱",
+        description: "一键清理垃圾、禁用无用服务、优化开机速度，纯净绿色便携版",
+        category: "实用工具",
+        categoryName: "实用工具",
+        tags: ["Windows", "优化", "工具", "系统"],
+        thumbnail: "https://picsum.photos/id/2/300/160",
+        link: "https://example.com/resource/win-tools",
+        downloads: 1120,
+        hot: false,
+        dateAdded: "2025-05-13T08:00:00Z"
+    },
+    {
+        id: 1010,
+        title: "产品经理入门到精通 全套视频",
+        description: "需求分析、竞品调研、原型设计、数据指标，从0到1成为PM",
+        category: "学习教程",
+        categoryName: "学习教程",
+        tags: ["产品经理", "PM", "教程", "视频"],
+        thumbnail: "https://picsum.photos/id/60/300/160",
+        link: "https://example.com/resource/pm-course",
+        downloads: 682,
+        hot: false,
+        dateAdded: "2025-05-04T14:15:00Z"
+    },
+    {
+        id: 1011,
+        title: "PPT 高端商务模板合集",
+        description: "50套科技风、简约风、工作汇报PPT模板，可编辑源文件",
+        category: "文档模板",
+        categoryName: "文档模板",
+        tags: ["PPT", "模板", "商务", "汇报"],
+        thumbnail: "https://picsum.photos/id/96/300/160",
+        link: "https://example.com/resource/ppt-templates",
+        downloads: 2010,
+        hot: true,
+        dateAdded: "2025-05-02T10:30:00Z"
+    },
+    {
+        id: 1012,
+        title: "程序员面试算法题解 LeetCode 精华",
+        description: "高频面试题详细解析，含Java/Python/Go三种语言解法，刷题必备",
+        category: "编程开发",
+        categoryName: "编程开发",
+        tags: ["算法", "面试", "LeetCode", "题解"],
+        thumbnail: "https://picsum.photos/id/77/300/160",
+        link: "https://example.com/resource/leetcode-solutions",
+        downloads: 3470,
+        hot: true,
+        dateAdded: "2025-04-28T19:20:00Z"
+    }
+];
+
+// 辅助: 当页面需要分类列表时自动生成，但所有资源都已在上方定义完毕
+console.log(`模拟数据加载完毕，共 ${window.allResources.length} 个初始资源`);
